@@ -1,0 +1,94 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block contenidoQueCambia %}
+
+<div class="containter">
+    <div class="row">
+        <div class="col-4">
+            Aquí va la lista de cursos!
+            <button>
+                <a href="{% url 'AppCoder:crea_curso' %}">Agregar</a>
+            </button>
+            {% if cursos %}
+            <ul>
+                <button>
+                    <a href="{% url 'AppCoder:cursos-buscar' %}">Buscar</a>
+                </button>
+                {% for curso in cursos %}
+                <li>{{ curso.curso }} ({{ curso.camada }})</li>
+                <div>
+                    <form action="{% url 'AppCoder:eliminar_curso' curso.id %}" method="post">{% csrf_token %}
+                        <button type="submit">Borrar</button>
+                    </form>
+                    <button>
+                        <a href="{% url 'AppCoder:editar_curso' curso.id %}">Editar</a>
+                    </button>
+                </div>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <h1>Lista vacia</h1>
+            {% endif %}
+        </div>
+        <div class="col-4">
+            Aquí va la lista de Profesores!
+            
+            
+            <button>
+                <a href="{% url 'AppCoder:crea_profesor' %}">Agregar</a>
+            </button>
+            {% if profesores %}
+            <ul>
+                <button>
+                    <a href="{% url 'AppCoder:profesor_buscar' %}">Buscar</a>
+                </button>
+                {% for profesor in profesores %}
+                <li>{{ profesor.nombre }} / {{ profesor.apellido }} / {{ profesor.email }} / {{ profesor.profesion }}</li>
+                <div>
+                    <form action="{% url 'AppCoder:eliminar_profesor' profesor.id %}" method="post">{% csrf_token %}
+                        <button type="submit">Borrar</button>
+                    </form>
+                    <button>
+                        <a href="{% url 'AppCoder:editar_profesor' profesor.id %}">Editar</a>
+                    </button>
+                </div>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <h1>Lista vacia</h1>
+            {% endif %}
+        </div>
+        <div class="col-4">
+            Aquí va la lista de Estudiantes!
+            
+            
+            <button>
+                <a href="{% url 'AppCoder:crea_estudiante' %}">Agregar</a>
+            </button>
+            {% if estudiantes %}
+            <ul>
+                <button>
+                    <a href="{% url 'AppCoder:estudianteBuscar' %}">Buscar</a>
+                </button>
+                {% for estudiante in estudiantes %}
+                <li>{{ estudiante.nombre }} / {{ estudiante.apellido }} / {{ estudiante.email }}</li>
+                <div>
+                    <form action="{% url 'AppCoder:eliminar_estudiante' estudiante.id %}" method="post">{% csrf_token %}
+                        <button type="submit">Borrar</button>
+                    </form>
+                    <button>
+                        <a href="{% url 'AppCoder:editar_estudiante' estudiante.id %}">Editar</a>
+                    </button>
+                </div>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <h1>Lista vacia</h1>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

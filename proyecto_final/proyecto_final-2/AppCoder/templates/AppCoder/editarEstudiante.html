@@ -1,0 +1,11 @@
+{% extends "AppCoder/padre.html" %}
+
+
+{% block contenidoQueCambia %}
+    <body style="background-color: green;">
+        <form action="{% url 'AppCoder:editar_estudiante' id %}" method="POST">{% csrf_token %}
+            {{ miFormulario.as_table }}
+            <input type="submit" value="Editar">
+        </form>
+    </body>
+{% endblock %}
